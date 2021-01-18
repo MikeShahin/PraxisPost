@@ -1,0 +1,25 @@
+<h1>User Signin</h1>
+<br>
+<%= form_tag('/signin', method: :post) do %>
+
+    <div>
+        <%= label_tag(:name, "Username:") %>
+        <br>
+        <%= text_field_tag(:name) %>
+        <br>
+        <%= label_tag(:password, "Password:") %>
+        <br>
+        <%= password_field_tag(:password) %>
+        <br>
+        <%= submit_tag("Sign In")%>
+    </div>
+<% end %>
+<br>
+<div>
+    <%= link_to('Log in with Facebook!', '/auth/facebook/callback') %>
+</div>
+<br>
+<%= link_to 'Create a new account', new_user_path %>
+<br>
+<br>
+<%= link_to 'Go Home', root_path %>   

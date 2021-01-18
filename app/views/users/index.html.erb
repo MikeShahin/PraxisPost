@@ -1,0 +1,14 @@
+<h1>User List</h1>
+
+<% if @user.admin %>
+    <% @users.each do |u| %>
+        <%= u.name%>
+        <%= u.email%>
+        <br>
+        <br>
+    <% end %>
+    <%=link_to 'Go Home', root_path %>
+<% else %>
+    <p>Sorry, you do not have access to this page</p>
+    <%=link_to 'Go Home', root_path %>
+<% end %>

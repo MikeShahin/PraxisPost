@@ -1,0 +1,26 @@
+<%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <p>Something went wrong</p>
+
+            <ul>
+                <% @user.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= f.label "Username" %>
+        <%= f.text_field :name %>
+        <br>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+        <br>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+        <br>
+        <%= f.submit %>
+    </div>
+<% end %>

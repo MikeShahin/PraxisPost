@@ -1,0 +1,26 @@
+<%= form_for @post do |f| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation">
+            <p>Something went wrong</p>
+
+            <ul>
+                <% @post.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+        <br>
+        <%= f.label :url %>
+        <%= f.url_field :url %>
+        <br>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+        <br>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <%= f.submit %>
+    </div>
+<% end %>

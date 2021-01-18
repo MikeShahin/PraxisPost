@@ -1,0 +1,28 @@
+<h1><%= @user.name %>'s profile</h1>
+
+<% if @user.admin %>
+    <p>This is the site admin</p>
+<% end %>
+
+<%= link_to 'Home', posts_path %>
+<% if session[:user_id] == @user.id %>
+    <%= link_to 'Edit Info', edit_user_path(@user) %>
+    <%=link_to 'Log Out', logout_path %>
+<% end %>
+
+<h2>All posts by <%= @user.name %>:</h2>
+
+<% if @posts.empty? %>
+    <p>User has no posts</p>
+<% else %>
+    <% @posts.each do |p| %>
+        <li>
+        <% if p.url != "" %>
+            <h3><%= link_to p.title, p.url %></h3>
+        <% else %>
+            <h3><%= link_to p.title, post_path(p) %></h3>
+        <% end %>
+        <%= link_to "comments", post_path(p) %>
+        </li> <br>
+    <% end %>
+<% end %>
