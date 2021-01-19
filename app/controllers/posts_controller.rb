@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     end
 
     def new
-        if !current_user
+        if !logged_in?
             redirect_to root_path
         else
             @post = Post.new

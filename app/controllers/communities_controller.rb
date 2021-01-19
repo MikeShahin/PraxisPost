@@ -1,17 +1,18 @@
 class CommunitiesController < ApplicationController
     def new
-        @category = Community.new
+        @community = Community.new
     end
 
     def show
-        category = Community.find_by(id: params[:id])
-        @posts = Post.where(community_id: category)
+        @community = Community.find_by(id: params[:id])
+        @posts = Post.where(community_id: @community)
     end
 
     def create
-        @category = Community.new(community_params)
-        if @category.valid?
-            @category.save
+        @community = Community.new(community_params)
+        if @community.valid?
+            @community.save
+            redirect_to new_post_path
         else
             render :new
         end
@@ -20,6 +21,6 @@ class CommunitiesController < ApplicationController
     private
 
     def community_params
-        params.require(:community).permit(:category)
+        params.require(:community).permit(:category, :info)
     end
 end

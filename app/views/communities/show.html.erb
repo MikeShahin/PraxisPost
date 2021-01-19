@@ -1,4 +1,20 @@
-    <ol>
+<h1>Welcome to <%= @community.category %></h1>
+
+<div class="community_info">
+    <h3><%= @community.info %></h3>
+</div>
+  <% if @user %>
+      <%=link_to 'New Post', new_post_path %>
+      <%=link_to 'User Page', user_path(@user) %>
+      <%=link_to 'Log Out', logout_path %>
+  <% else %>
+      <%= link_to 'Log In', signin_path %>
+      <%= link_to 'Sign Up', new_user_path %>
+  <% end %>
+  <%= link_to 'Back home', root_path %>  
+
+  new_community_post_path
+<ol>
     <% @posts.each do |p| %>
     <div class="post">
         <li>
@@ -21,4 +37,4 @@
     <% end %>
     <br>
     <br>
-    </ol>
+</ol>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # get '/auth/facebook/callback' => 'sessions#facebook'
 
   resources :posts do
+    # nested resource for comments
     resources :comment, only: [:index, :show, :new, :edit, :destroy]
   end 
 
@@ -17,9 +18,7 @@ Rails.application.routes.draw do
   
   resources :users
 
-
   resources :comments
- 
 
   delete '/posts/:id' => 'posts#destroy'
 
