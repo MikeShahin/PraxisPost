@@ -4,7 +4,7 @@
 <p><%=@post.description%></p>
 <% if session[:user_id] == @post.user_id || @user.admin %>
     <%= link_to 'Edit Post', edit_post_path(@post) %>
-    <%= link_to 'Delete Post', @post, method: :delete %>
+    <%= link_to 'Delete Post', @post, method: :delete, data: {confirm: "Are you sure? No take backsies!"} %>
 <% end %>
 <a href="/">Back to all posts</a>
 <h4>Comments</h4>

@@ -38,9 +38,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'omniauth'
+gem 'omniauth', '~> 1.9.0'
 
 gem 'omniauth-facebook'
+
+# gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 
 gem 'dotenv-rails'
 

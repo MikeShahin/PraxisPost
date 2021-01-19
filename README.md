@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# problems still open:
 
-Things you may want to cover:
+ nested resources requirement met?
 
-* Ruby version
+ # steps left
 
-* System dependencies
+clear all open problems
 
-* Configuration
+add css/styling
 
-* Database creation
+DRY/rewrite code
 
-* Database initialization
+write readme
 
-* How to run the test suite
+record demo
 
-* Services (job queues, cache servers, search engines, etc.)
+write blog
 
-* Deployment instructions
-
-* ...

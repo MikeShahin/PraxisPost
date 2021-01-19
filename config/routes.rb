@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   
   match '/auth/:provider/callback', to: 'sessions#facebook', via: [:get, :post]
+  # get '/auth/facebook/callback' => 'sessions#facebook'
 
   resources :posts do
     resources :comment, only: [:index, :show, :new, :edit, :destroy]

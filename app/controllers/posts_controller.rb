@@ -1,15 +1,19 @@
 class PostsController < ApplicationController
     before_action :current_user
     before_action :set_post, only: [:show, :update, :destroy]
-    
+    require 'pry'
     def index
-        if params[:query] != ""
-            @posts = Post.search(params[:query])
-            render 'index'
-        elsif params[:order] == "Newest Posts" || params[:order] == nil
+        # if params[:query] != ""
+        #     @posts = Post.search(params[:query])
+        #     render 'index'
+        if params[:order] == "Newest Posts" || params[:order] == nil
             @posts = Post.all.order(created_at: :desc)
         elsif params[:order] == "Oldest Posts"
             @posts = Post.all.order(created_at: :asc)
+        end
+        if params[:query] != nil
+            @posts = Post.search(params[:query]).order(created_at: :desc)
+            render 'index'
         end
     end
 
