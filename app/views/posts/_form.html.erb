@@ -21,6 +21,8 @@
         <%= f.text_area :description %>
         <br>
         <%= f.hidden_field :user_id, value: @user.id %>
+        
+        <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
         <%= f.submit %>
     </div>
 <% end %>

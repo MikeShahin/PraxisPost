@@ -14,7 +14,7 @@
 <div class="sorting">
   <%= form_tag(root_path, method: "get") do %>
     <div>
-      <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts']), {prompt: "Sort Posts"} %>
+      <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts"} %>
       <%= submit_tag "Sort", name: nil %>
     </div>
   <% end %>

@@ -7,6 +7,10 @@ class PostsController < ApplicationController
             @posts = Post.all.order(created_at: :desc)
         elsif params[:order] == "Oldest Posts"
             @posts = Post.all.order(created_at: :asc)
+        elsif params[:order] == "Self Posts" #active record scope method for filtering self posts
+            @posts = Post.self_posts 
+        elsif params[:order] == "Link Posts" #active record scope method for filtering linked posts
+            @posts = Post.linked_posts
         end
         if params[:query] != nil
             @posts = Post.search(params[:query]).order(created_at: :desc)
@@ -77,6 +81,6 @@ class PostsController < ApplicationController
     end
     
     def post_params
-        params.require(:post).permit(:title, :url, :description, :user_id, comment_attributes: [:reply, :user_id, :post_id])
+        params.require(:post).permit(:title, :url, :description, :user_id, :community_id, community_attributes: [:category])
     end
 end

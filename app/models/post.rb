@@ -1,13 +1,17 @@
 class Post < ApplicationRecord
     belongs_to :user
     has_many :comments
+    belongs_to :community
     has_many :users, through: :comments
+    # accepts_nested_attributes_for :community
 
     validates :title, presence: true
     validates :title, length: { maximum: 150 }
-    # if :url != ""
-    #     validates :url, uniqueness: true
-    # end
+    # validates :url, uniqueness: true, allow_nil: true
+
+    # adding Active Record scope methods
+    scope :self_posts, -> { where('url == ?', "" )}
+    scope :linked_posts, -> { where('url != ?', "" )}
 
     def self.search(query)
         if query.present?
