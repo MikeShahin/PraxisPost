@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
-    # skip_before_action :verify_user, only: [:new, :create]
-    require 'pry'
     def new
-        
     end
 
     def create
@@ -16,22 +13,22 @@ class SessionsController < ApplicationController
     end
 
     def facebook
+        # finds existing user or creates new user based on omniAuth login
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
           u.name = auth['info']['name']
           u.email = auth['info']['email']
           u.password = SecureRandom.hex
         end
 
-        if @user.save
+        if @user.save # if user is new, creates a new user entry in Users table, logs them in/starts new session
             start_session
-        else
+        else # if user already exists from previous omniauth login, logs them in/starts new session
             start_session
         end
     end
 
     def destroy
         session.delete("user_id")
-        flash.now[:error] = "Logged out!"
         redirect_to root_path
     end
 end

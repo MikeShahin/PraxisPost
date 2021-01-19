@@ -1,14 +1,24 @@
-<ol>
-<% @posts.each do |p| %>
-    <li>
-    <% if p.url != "" %>
-        <h3><%= link_to p.title, p.url %></h3>
-    <% else %>
-        <h3><%= link_to p.title, post_path(p) %></h3>
+    <ol>
+    <% @posts.each do |p| %>
+    <div class="post">
+        <li>
+        <% if p.url != "" %>
+            <h3><%= link_to p.title, p.url %></h3>
+        <% else %>
+            <h3><%= link_to p.title, post_path(p) %></h3>
+        <% end %>
+        <div class="postinfo">
+            by <%= link_to p.user.name, user_path(p.user) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>
+
+            <% if p.comments.count == 1 %>
+                <%= link_to "#{p.comments.count} comment", post_path(p) %></li>
+            <% else %>
+                <%= link_to "#{p.comments.count} comments", post_path(p) %></li>
+            <% end %>
+        </div>
+
+    </div>
     <% end %>
-    by <%= link_to p.user.name, user_path(p.user) %> on <%= p.created_at.strftime("%m/%d/%Y") %>
-    <%= link_to "read comments", post_path(p) %></li>
-<% end %>
-<br>
-<br>
-</ol>
+    <br>
+    <br>
+    </ol>

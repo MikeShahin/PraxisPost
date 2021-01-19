@@ -9,16 +9,7 @@
 <a href="/">Back to all posts</a>
 <h4>Comments</h4>
 
-<div class="commentForm">
-    <%= form_for @comment do |f| %>
-        <%= f.hidden_field :post_id %> 
-        <%= f.hidden_field :user_id %> 
-        <%= f.text_area(:reply) %>
-        <br>
-        <br>
-        <%= f.submit('Add Comment') %>
-    <% end %>
-</div>
+<%= render "comment_form" %>
 
 <% if @comments.count != 0 %>
     <ol>

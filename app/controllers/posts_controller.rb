@@ -3,9 +3,6 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :update, :destroy]
     require 'pry'
     def index
-        # if params[:query] != ""
-        #     @posts = Post.search(params[:query])
-        #     render 'index'
         if params[:order] == "Newest Posts" || params[:order] == nil
             @posts = Post.all.order(created_at: :desc)
         elsif params[:order] == "Oldest Posts"
@@ -37,8 +34,7 @@ class PostsController < ApplicationController
 
     def show
         if !logged_in?
-            #flash
-            redirect_to signin_path
+            redirect_to signin_path, :error => "Please login to view comments"
         end  
         @user = User.find_by(id: session[:user_id])
         @comments = @post.comments.all
@@ -46,8 +42,9 @@ class PostsController < ApplicationController
     end
 
     def edit
-        if session[:user_id] != Post.find_by(id: params[:id]).user_id && !admin
-            redirect_to root_path
+        # if the user is not the same one who made the post, or an admin, the cannot edit the post
+        if !user_allowed?
+            redirect_to root_path, :error => "You may only edit your own posts!"
         else
             set_post
         end
@@ -55,7 +52,7 @@ class PostsController < ApplicationController
 
     def update
         if @post.update(post_params)
-            redirect_to post_path(@post)
+            redirect_to post_path(@post), :notice => "Post successfully edited!"
         else
             render 'new'
         end
@@ -68,15 +65,18 @@ class PostsController < ApplicationController
 
     private
 
+    def user_allowed?
+        session[:user_id] == Post.find_by(id: params[:id]).user_id && admin
+    end
+
     def set_post
         @post = Post.find_by(id: params[:id])
         if @post.nil?
-            flash[:error] = "Post does not exist"
-            redirect_to root_path
+            redirect_to root_path, :notice => "That post does not exist, stop trying to hack this website!"
         end
     end
     
     def post_params
-        params.require(:post).permit(:title, :url, :description, :user_id)
+        params.require(:post).permit(:title, :url, :description, :user_id, comment_attributes: [:reply, :user_id, :post_id])
     end
 end
