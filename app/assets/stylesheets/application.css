@@ -13,12 +13,3 @@
  *= require_tree .
  *= require_self
  */
- body {background-color: rgb(219, 143, 115);}
-
- .post a {
-    color: rgb(35, 102, 102);
-  }
-
-  .postinfo a {
-    color: rgb(55, 65, 65);
-  }

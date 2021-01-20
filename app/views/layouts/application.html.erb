@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+ <header class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "The Praxis Post", root_path, id: "logo" %>
+          <nav>
+            <%= render 'posts/nav_options' %>
+          </nav>
+        </div>
+      </div>
+    </header>
     <title>The Praxis Post</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,6 +25,7 @@
           <%= msg %>
         </div>
     <% end %>
+    
     <%= yield %>
   </body>
 </html>

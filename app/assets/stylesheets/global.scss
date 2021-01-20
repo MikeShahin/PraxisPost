@@ -1,0 +1,58 @@
+@import "bootstrap";
+
+body {
+    background-color: rgb(64, 150, 107);
+
+}
+header {
+    background: rgb(5, 241, 241);
+	width: 100%;
+	padding: 2rem 0;
+	border-bottom: 1px solid #E4E4E4;
+	#logo {
+		float: left;
+		font-size: 1.75rem;
+		a {
+			color: #333233;
+			text-decoration: none;
+			&:hover {
+				color: #6d6969;
+			}
+		}
+	}
+	nav {
+		float: left;
+		a {
+			margin-left: 1.5rem;
+			line-height: 2;
+			color: #9B9B9B;
+			text-decoration: none;
+			&:hover {
+				color: #000000;
+			}
+		}
+	}
+}
+.left-nav {
+    float: left;
+  }
+  
+  .right-nav {
+    float: right;
+  }
+
+  .post a {
+     color: rgb(252, 225, 247);
+   }
+ 
+   .postinfo a {
+     color: rgb(113, 133, 133);
+   }
+
+   .center {
+    text-align: center;
+  }
+
+
+
+  
