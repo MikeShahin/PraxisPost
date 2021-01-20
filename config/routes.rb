@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :comment, only: [:index, :show, :new, :edit, :destroy]
   end 
 
-  resources :community do
+  resources :communities do
     # nested resource for community
     resources :posts
   end

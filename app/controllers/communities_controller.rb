@@ -1,4 +1,5 @@
 class CommunitiesController < ApplicationController
+    before_action :current_user
     def new
         @community = Community.new
     end

@@ -5,25 +5,39 @@ class PostsController < ApplicationController
     def index
         if params[:order] == "Newest Posts" || params[:order] == nil
             @posts = Post.all.order(created_at: :desc)
+            @description = "Newest Posts"
         elsif params[:order] == "Oldest Posts"
             @posts = Post.all.order(created_at: :asc)
+            @description = "Oldest Posts"
         elsif params[:order] == "Self Posts" #active record scope method for filtering self posts
-            @posts = Post.self_posts 
+            @posts = Post.self_posts
+            @description = "Text Posts" 
         elsif params[:order] == "Link Posts" #active record scope method for filtering linked posts
             @posts = Post.linked_posts
+            @description = "Linked Posts"
         end
         if params[:query] != nil
             @posts = Post.search(params[:query]).order(created_at: :desc)
             render 'index'
         end
+        # if community id, filter posts by only that community, no id all posts
+        if nested?
+            @posts = Post.where(community_id: params[:community_id])
+            @description = Community.find_by(params[:community_id]).info
+        end
+       
+        
     end
 
     def new
         if !logged_in?
             redirect_to root_path
+        elsif nested?
+            @post = Post.new
         else
             @post = Post.new
         end
+        # binding.pry
     end
 
     def create
@@ -43,6 +57,7 @@ class PostsController < ApplicationController
         @user = User.find_by(id: session[:user_id])
         @comments = @post.comments.all
         @comment = @post.comments.new
+        
     end
 
     def edit
@@ -68,6 +83,10 @@ class PostsController < ApplicationController
     end
 
     private
+
+    def nested?
+        @nested = params[:community_id]
+    end
 
     def user_allowed?
         session[:user_id] == Post.find_by(id: params[:id]).user_id && admin

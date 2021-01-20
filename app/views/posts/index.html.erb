@@ -1,29 +1,39 @@
 <h1>The Praxis Post</h1>
 <div class="navoptions">
-  <% if @user %>
-      <%=link_to 'New Post', new_post_path %>
+    <% if @user %>
+      <% if !@nested %>
+        <%= link_to 'New Post', new_post_path %>
+      <% else %>
+        <%= link_to 'Post in this community', new_community_post_path %>
+      <% end %>
       <%=link_to 'User Page', user_path(@user) %>
+      <% if @nested %>
+        <%= link_to 'Back Home', root_path %>
+      <% end %>
       <%=link_to 'Log Out', logout_path %>
   <% else %>
       <%= link_to 'Log In', signin_path %>
       <%= link_to 'Sign Up', new_user_path %>
   <% end %>
-</div>
-<br>
-<br>
-<div class="sorting">
-  <%= form_tag(root_path, method: "get") do %>
-    <div>
-      <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts"} %>
-      <%= submit_tag "Sort", name: nil %>
-    </div>
-  <% end %>
-  <%= form_tag root_path, method: :get do %>
-    <p>
-      <%= text_field_tag :query, params[:query], placeholder: "Search Posts" %>
-      <%= submit_tag "Search", name: nil %>
-    </p>
-  <% end %>
-</div>
 
+</div>
+<br>
+<br>
+<% if !@nested %>
+  <div class="sorting">
+    <%= form_tag(root_path, method: "get") do %>
+      <div>
+        <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts"} %>
+        <%= submit_tag "Sort", name: nil %>
+      </div>
+    <% end %>
+    <%= form_tag root_path, method: :get do %>
+      <p>
+        <%= text_field_tag :query, params[:query], placeholder: "Search Posts" %>
+        <%= submit_tag "Search", name: nil %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+<p><%= @description %></p>
 <%= render "display" %>

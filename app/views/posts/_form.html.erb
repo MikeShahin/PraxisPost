@@ -22,10 +22,13 @@
         <br>
         <%= f.hidden_field :user_id, value: @user.id %>
         <br>
-        <%= f.label :community %>
-        <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
-        <p>or create a <%= link_to 'new community', new_community_path %></p>
-        
+        <% if !@nested %>
+            <%= f.label :community %>
+            <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
+            <p>or create a <%= link_to 'new community', new_community_path %></p>
+        <% else %>
+            <%= f.hidden_field :community_id, value: @nested %>
+        <% end %>
         <%= f.submit %>
     </div>
 <% end %>

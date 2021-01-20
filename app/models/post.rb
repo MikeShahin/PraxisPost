@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
     validates :title, presence: true
     validates :title, length: { maximum: 150 }
-    # validates :url, uniqueness: true, allow_nil: true
+    validates :url, uniqueness: true, allow_blank: true, allow_nil: true
 
     # adding Active Record scope methods
     scope :self_posts, -> { where('url == ?', "" )}
