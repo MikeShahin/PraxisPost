@@ -8,13 +8,13 @@
             <h3><%= link_to p.title, post_path(p) %></h3>
         <% end %>
         <div class="postinfo">
-            by <%= link_to p.user.name, user_path(p.user) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %> posted in <%= link_to p.community.category, community_posts_path(p.community) %>
+           <p>by <%= link_to p.user.name, user_path(p.user) %> posted in <%= link_to p.community.category, community_posts_path(p.community) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>. 
 
             <% if p.comments.count == 1 %>
                 <%= link_to "#{p.comments.count} comment", post_path(p) %></li>
             <% else %>
                 <%= link_to "#{p.comments.count} comments", post_path(p) %></li>
-            <% end %>
+            <% end %></p>
         </div>
 
     </div>

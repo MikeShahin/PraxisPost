@@ -5,9 +5,12 @@
       <% else %>
         <%= link_to 'Post in this community', new_community_post_path %>
       <% end %>
-      <%=link_to 'User Page', user_path(@user) %>
+      <%=link_to 'User Page', user_path(current_user) %>
       <% if @nested %>
         <%= link_to 'Back Home', root_path %>
+      <% end %>
+      <% if admin %>
+        <%= link_to 'User List', users_path %>
       <% end %>
       <%=link_to 'Log Out', logout_path %>
   <% else %>

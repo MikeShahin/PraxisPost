@@ -1,25 +1,5 @@
-<h1>new community</h1>
-
-<%= form_for @community do |f| %>
-    <% if @community.errors.any? %>
-        <div id="error_explanation">
-            <p>Something went wrong</p>
-
-            <ul>
-                <% @community.errors.full_messages.each do |m| %>
-                    <li><%= m %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
-    <div>
-        <%= f.label 'Community Name' %>
-        <%= f.text_field :category %>
-        <br>
-        <br>
-        <%= f.label 'describe your community' %>
-        <%= f.text_area :info %>
-        
-        <%= f.submit %>
-    </div>
-<% end %>
+<div class="centered">
+<h2>Start a New Community!</h1>
+<br>
+<%= render "form" %>
+</div>

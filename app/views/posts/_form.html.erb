@@ -1,8 +1,8 @@
+<div class="form">
 <%= form_for @post do |f| %>
     <% if @post.errors.any? %>
-        <div id="error_explanation">
-            <p>Something went wrong</p>
-
+        <div id="error">
+            <p>Hold up:</p>
             <ul>
                 <% @post.errors.full_messages.each do |m| %>
                     <li><%= m %></li>
@@ -10,25 +10,29 @@
             </ul>
         </div>
     <% end %>
-    <div>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-        <br>
-        <%= f.label :url %>
-        <%= f.url_field :url %>
-        <br>
-        <%= f.label :description %>
-        <%= f.text_area :description %>
-        <br>
-        <%= f.hidden_field :user_id, value: @user.id %>
-        <br>
-        <% if !@nested %>
-            <%= f.label :community %>
-            <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
-            <p>or create a <%= link_to 'new community', new_community_path %></p>
-        <% else %>
-            <%= f.hidden_field :community_id, value: @nested %>
-        <% end %>
-        <%= f.submit %>
-    </div>
+    
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br>
+    <br>
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+    <br>
+    <br>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <br>
+    <br>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <br>
+    <br>
+    <% if !@nested %>
+        <%= f.label :community %>
+        <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
+        <p>or create a <%= link_to 'new community', new_community_path %></p>
+    <% else %>
+        <%= f.hidden_field :community_id, value: @nested %>
+    <% end %>
+    <%= f.submit %>
 <% end %>
+</div>

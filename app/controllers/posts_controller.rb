@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :current_user
     before_action :set_post, only: [:show, :update, :destroy]
+
     require 'pry'
     
     def index
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
             redirect_to root_path
         elsif nested? # use to pass through @nested instance variable to view page
             @post = Post.new
+            @community = Community.find_by(params[:community_id]).category.capitalize
         else
             @post = Post.new
         end
@@ -66,7 +68,7 @@ class PostsController < ApplicationController
     end
 
     def user_allowed?
-        session[:user_id] == Post.find_by(id: params[:id]).user_id && admin
+        session[:user_id] == Post.find_by(id: params[:id]).user_id || admin
     end
 
     def set_post
@@ -95,14 +97,14 @@ class PostsController < ApplicationController
             @posts = Post.search(params[:query]).order(created_at: :desc)
             render 'index'
         end
-        # if community id, filter posts by only that community, no id all posts
+        # if community nested show page, filter posts by only that community
         if nested?
             @posts = Post.where(community_id: params[:community_id])
-            @description = Community.find_by(params[:community_id]).info
+            @description = "#{Community.find_by(params[:community_id]).category.capitalize}: #{Community.find_by(params[:community_id]).info}"
         end
     end
     
     def post_params
-        params.require(:post).permit(:title, :url, :description, :user_id, :community_id, community_attributes: [:category])
+        params.require(:post).permit(:title, :url, :description, :user_id, :community_id)
     end
 end

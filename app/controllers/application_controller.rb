@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     add_flash_types :notice, :error
 
-    helper_method :logged_in?
+    helper_method :logged_in?, :admin, :current_user
 
     def current_user
         @user = User.find_by(id: session[:user_id])

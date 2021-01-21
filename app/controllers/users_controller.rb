@@ -17,6 +17,9 @@ class UsersController < ApplicationController
     end
 
     def show
+        if !logged_in?
+            redirect_to signin_path, :error => "Please login to view a users page"
+        end 
         @posts = Post.where(user_id: @user.id)
     end
 

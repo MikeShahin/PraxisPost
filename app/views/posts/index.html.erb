@@ -1,21 +1,16 @@
-<%#<%= render "nav_options" %>
 <br>
 <br>
 <% if !@nested %>
   <div class="sorting">
-    <%= form_tag(root_path, method: "get") do %>
-      <div>
-        <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts"} %>
-        <%= submit_tag "Sort", name: nil %>
-      </div>
-    <% end %>
     <%= form_tag root_path, method: :get do %>
-      <p>
-        <%= text_field_tag :query, params[:query], placeholder: "Search Posts" %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search Posts", class: "box" %>
         <%= submit_tag "Search", name: nil %>
-      </p>
+    <% end %>
+    <%= form_tag(root_path, method: "get") do %>
+        <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts", class: "box"} %>
+        <%= submit_tag "Sort", name: nil %>
     <% end %>
   </div>
 <% end %>
-<p><%= @description %></p>
+<p class="description"><%= @description %></p>
 <%= render "display" %>

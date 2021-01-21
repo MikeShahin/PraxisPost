@@ -1,3 +1,9 @@
-<h1>New Post</h1>
-<br>
-<%= render "form" %>
+<div class="centered">
+    <% if !@nested %>
+        <h1>New Post</h1>
+    <% else %>
+        <h1>New Post in <%= @community %></h1>
+    <% end %>
+    <br>
+    <%= render "form" %>
+</div>

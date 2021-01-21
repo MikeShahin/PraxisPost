@@ -6,7 +6,7 @@
         <div class="container">
           <%= link_to "The Praxis Post", root_path, id: "logo" %>
           <nav>
-            <%= render 'posts/nav_options' %>
+            <%= render 'layouts/nav_options' %>
           </nav>
         </div>
       </div>
@@ -21,7 +21,7 @@
 
   <body>
     <% flash.each do |type, msg| %>
-        <div>
+        <div class="error">
           <%= msg %>
         </div>
     <% end %>

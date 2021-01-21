@@ -6,6 +6,7 @@ class Post < ApplicationRecord
     # accepts_nested_attributes_for :community
 
     validates :title, presence: true
+    validates :title, uniqueness: true
     validates :title, length: { maximum: 150 }
     validates :url, uniqueness: true, allow_blank: true, allow_nil: true
 

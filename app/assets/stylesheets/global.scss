@@ -1,31 +1,88 @@
 @import "bootstrap";
 
 body {
-    background-color: rgb(64, 150, 107);
-
+    background-color: rgb(66, 61, 52);
+    color: #f0caf1;
+    
+    a {
+        color: #fdefef;
+        &:hover {
+            color: #000000;
+        }
+    }
 }
+
+.form label {
+    text-align: left;
+}
+.form input {
+    display: inline-block;
+    text-align: left;
+    float: right;
+}
+
+.form textarea{
+    display: inline-block;
+    text-align: left;
+    float: right;
+}
+.form select {
+    display: inline-block;
+    text-align: left;
+    float: right;
+}
+
+.centered {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    z-index: 15;
+    top: 20%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+}
+
+.comments {
+    margin-left: 60px;
+}
+
+.newpost {
+    h1 {
+        margin-left: 60px;
+    }
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    z-index: 15;
+    top: 20%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+}
+
 header {
-    background: rgb(5, 241, 241);
+    position: relative;
+    background: rgb(16, 121, 121);
 	width: 100%;
 	padding: 2rem 0;
-	border-bottom: 1px solid #E4E4E4;
 	#logo {
 		float: left;
 		font-size: 1.75rem;
-		a {
-			color: #333233;
-			text-decoration: none;
-			&:hover {
-				color: #6d6969;
-			}
-		}
-	}
+        color: #0a2a85;
+        &:hover {
+            color: #000000;	
+        }
+    }
+    .navoptions {
+        margin-top: 7px;
+    }
 	nav {
 		float: left;
 		a {
-			margin-left: 1.5rem;
+            text-align: center;
+            margin-left: 2rem;
+            margin-bottom: 8rem;
 			line-height: 2;
-			color: #9B9B9B;
+			color: #fdefef;
 			text-decoration: none;
 			&:hover {
 				color: #000000;
@@ -41,18 +98,64 @@ header {
     float: right;
   }
 
-  .post a {
-     color: rgb(252, 225, 247);
-   }
- 
-   .postinfo a {
-     color: rgb(113, 133, 133);
-   }
+.sorting {
+    margin-left: 5pc;
+    // .box {
+    //     float: left;
+    //   }
+}
 
-   .center {
-    text-align: center;
+.showpost {
+    margin-left: 35px;
+    margin-top: 35px;
+}
+
+.comments {
+    margin-left: -5px;
+    color: rgb(239, 231, 247);
+    li {
+        padding-top: 20px;
+    }
+}
+
+.post {
+
+    margin-left: 2pc;
+    h3 {
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1rem;
+        color: rgba(235, 195, 227, 0.753);
+        a {
+            color: rgba(252, 225, 247, 0.753);
+            &:hover {
+				color: #6d6969;
+			}
+        }
+    }
+
+    li {
+        // list-style: decimal-leading-zero;
+        font-size: 1.5rem;
+    }
+    
+    a {
+        color: rgb(252, 225, 247);
+    }
+
+    .center {
+        text-align: center;
+    }
+}
+
+  .error {
+    color: rgb(241, 16, 16);
   }
 
-
+  .description {
+      color: aqua;
+      text-align: center;
+  }
 
   
