@@ -3,10 +3,17 @@
     <div class="postinfo">
     <p>by: <%= link_to @post.user.name, user_path(@post.user) %> in <%= link_to @post.community.category, community_posts_path(@post.community) %></p>
     </div>
+
+    <% if picture? %>
+        <%= image_tag(@post.url) %>
+        <br>
+    <% end %>
+
     <% if @post.description != "" %>
         <h4>Description:</h4>
         <p><%=@post.description%></p>
     <% end %>
+    
     <% if session[:user_id] == @post.user_id || admin %>
         <%= link_to 'Edit Post', edit_post_path(@post) %>
         <%= link_to 'Delete Post', @post, method: :delete, data: {confirm: "Are you sure? No take backsies!"} %>

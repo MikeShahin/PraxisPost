@@ -20,7 +20,7 @@ class UsersController < ApplicationController
         if !logged_in?
             redirect_to signin_path, :error => "Please login to view a users page"
         end 
-        @posts = Post.paginate(page: params[:page], per_page: 10).where(user_id: @user.id)
+        @posts = Post.paginate(page: params[:page], per_page: 10).where(user_id: @user.id).order(created_at: :desc)
     end
 
     def index

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :current_user
     before_action :set_post, only: [:show, :update, :destroy]
+    helper_method :picture?
 
     require 'pry'
     
@@ -36,7 +37,8 @@ class PostsController < ApplicationController
         @user = User.find_by(id: session[:user_id])
         @comments = @post.comments.all
         @comment = @post.comments.new
-        
+        # display pics on show page if url ends with picture extension:
+        @url = @post.url.split(".").last
     end
 
     def edit
@@ -59,6 +61,10 @@ class PostsController < ApplicationController
     def destroy
         @post.destroy
         redirect_to root_path
+    end
+
+    def picture?
+        @url == "jpg" || @url == "png"
     end
 
     private
