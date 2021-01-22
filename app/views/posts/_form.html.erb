@@ -28,7 +28,7 @@
     <br>
     <% if !@nested %>
         <%= f.label :community %>
-        <%= f.select :community_id, options_from_collection_for_select(Community.all, :id, :category) %>
+        <%= f.select :community_id, options_from_collection_for_select(Community.all.order(:category), :id, :category), {:prompt => '-- Select Community --'}%>
         <p>or create a <%= link_to 'new community', new_community_path %></p>
     <% else %>
         <%= f.hidden_field :community_id, value: @nested %>

@@ -81,25 +81,25 @@ class PostsController < ApplicationController
     def homepage_options
         @description = ""
         if params[:order] == "Newest Posts" || params[:order] == nil
-            @posts = Post.all.order(created_at: :desc)
+            @posts = Post.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
             @description = ""
         elsif params[:order] == "Oldest Posts"
-            @posts = Post.all.order(created_at: :asc)
+            @posts = Post.paginate(page: params[:page], per_page: 10).order(created_at: :asc)
             @description = ""
         elsif params[:order] == "Self Posts" #active record scope method for filtering self posts
-            @posts = Post.self_posts
+            @posts = Post.paginate(page: params[:page], per_page: 10).self_posts
             @description = "" 
         elsif params[:order] == "Link Posts" #active record scope method for filtering linked posts
-            @posts = Post.linked_posts
+            @posts = Post.paginate(page: params[:page], per_page: 10).linked_posts
             @description = ""
         end
         if params[:query] != nil
-            @posts = Post.search(params[:query]).order(created_at: :desc)
+            @posts = Post.paginate(page: params[:page], per_page: 10).search(params[:query]).order(created_at: :desc)
             render 'index'
         end
         # if community nested show page, filter posts by only that community
         if nested?
-            @posts = Post.where(community_id: params[:community_id])
+            @posts = Post.paginate(page: params[:page], per_page: 10).where(community_id: params[:community_id])
             @description = "#{Community.find_by(params[:community_id]).category.capitalize}: #{Community.find_by(params[:community_id]).info}"
         end
     end

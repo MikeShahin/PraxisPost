@@ -1,0 +1,14 @@
+<div class="indent">
+<h1>Our Communities!</h1>
+<ul>
+    <% @communities.each do |c| %>
+    <li>
+        <%= link_to c.category.capitalize, community_posts_path(c) %>: <%= c.info %>
+        <br>
+        <br>
+    </li>
+    <% end %>
+</ul>
+
+<p>Can't find what you're looking for? <%= link_to 'create your own community!', new_community_path %></p>
+</div>

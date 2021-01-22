@@ -20,7 +20,7 @@
         <% if @comments.count != 0 %>
             <ol>
             <% @comments.each do |c| %>
-                <li><%= c.user.name %> replied: <%= c.reply %></li>
+                <li><%= link_to c.user.name, user_path(c.user) %> replied: <%= c.reply %></li>
             <% end %>
             </ol>
         <% else %>

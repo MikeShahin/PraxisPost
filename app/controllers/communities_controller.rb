@@ -4,6 +4,11 @@ class CommunitiesController < ApplicationController
         @community = Community.new
     end
 
+    def index
+        @communities = Community.all.order(:category)
+        # @user = current_user
+    end
+
     def show
         @community = Community.find_by(id: params[:id])
         @posts = Post.where(community_id: @community)
