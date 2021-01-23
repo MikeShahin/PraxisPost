@@ -1,6 +1,6 @@
 <%= form_for @comment do |f| %>
         <%= f.label :reply %>
-        <%= f.text_field :reply, :value => "password" %>
+        <%= f.text_field :reply, :value => "password", :size=>"5000" %>
         <br>
         <%= f.hidden_field :user_id, value: @user.id %>
         <%= f.hidden_field :post_id, value: @post.id %>

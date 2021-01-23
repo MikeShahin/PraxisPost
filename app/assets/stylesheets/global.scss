@@ -108,6 +108,10 @@ header {
 .showpost {
     margin-left: 35px;
     margin-top: 35px;
+    img {
+        max-width: 680px;
+        height: auto;
+    }
 }
 
 .comments {
@@ -150,43 +154,16 @@ header {
 }
 
   .error {
-    color: rgb(241, 16, 16);
+    color: rgb(241, 89, 89);
+    margin-left: 2pc;
+    margin-top: 2pc;
+    font-size: 20px;
   }
 
   .description {
       color: aqua;
       text-align: center;
   }
-
-//   .pagination {
-//     text-align: center;
-//     padding: 0.3em;
-//     cursor: default; }
-//     .pagination a, .pagination span, .pagination em {
-//       padding: 0.2em 0.5em; }
-//     .pagination .disabled {
-//       color: #aaaaaa; }
-//     .pagination .current {
-//       font-style: normal;
-//       font-weight: bold;
-//       color: #ff0084; }
-//     .pagination a {
-//       border: 1px solid #dddddd;
-//       color: #0063dc;
-//       text-decoration: none; }
-//       .pagination a:hover, .pagination a:focus {
-//         border-color: #003366;
-//         background: #0063dc;
-//         color: white; }
-//     .pagination .page_info {
-//       color: #aaaaaa;
-//       padding-top: 0.8em; }
-//     .pagination .previous_page, .pagination .next_page {
-//       border-width: 2px; }
-//     .pagination .previous_page {
-//       margin-right: 1em; }
-//     .pagination .next_page {
-//       margin-left: 1em; }
 
 .pagination {
     font-size: 17px;

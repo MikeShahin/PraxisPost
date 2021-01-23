@@ -3,7 +3,6 @@ class Post < ApplicationRecord
     belongs_to :community
     has_many :comments
     has_many :users, through: :comments
-    # accepts_nested_attributes_for :community
 
     validates :title, presence: true
     validates :title, uniqueness: true

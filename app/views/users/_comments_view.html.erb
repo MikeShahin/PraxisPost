@@ -1,0 +1,12 @@
+<div class="showpost">
+<% if @user.comments.empty?%>
+    <p>User has no comments</p>
+<% else %>
+ <h3>Comments:</h3>
+    <ol>
+    <% @user.comments.order(created_at: :desc).each do |c| %>
+        <li><%= link_to c.reply, post_path(c.post_id) %></li>
+    <% end %>
+    </ol>
+<% end %>
+</div>

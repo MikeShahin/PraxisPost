@@ -1,0 +1,14 @@
+<div class="showpost">
+<% if @user.communities.empty? %>
+    <p>This user is not active in any communites yet</p>
+    </div>
+<% else %>
+    <h3>Active in these Communities:</h3>
+    <br>
+    </div>
+        <ol>
+    <% @user.communities.uniq.each do |c| %>
+        <li><%= link_to c.category, community_posts_path(c) %></li>
+    <% end %>
+    </ol>
+<% end %>

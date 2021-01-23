@@ -7,7 +7,7 @@
         <%= submit_tag "Search", name: nil %>
     <% end %>
     <%= form_tag(root_path, method: "get") do %>
-        <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts']), {prompt: "Sort Posts", class: "box"} %>
+        <%= select_tag :order, options_for_select(['Newest Posts', 'Oldest Posts', 'Self Posts', 'Link Posts'], :selected => params[:order]), {class: "box"} %>
         <%= submit_tag "Sort", name: nil %>
     <% end %>
   </div>

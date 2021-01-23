@@ -2,11 +2,10 @@ class PostsController < ApplicationController
     before_action :current_user
     before_action :set_post, only: [:show, :update, :destroy]
     helper_method :picture?
-
-    require 'pry'
     
     def index
         homepage_options
+        # binding.pry
     end
 
     def new
@@ -64,7 +63,7 @@ class PostsController < ApplicationController
     end
 
     def picture?
-        @url == "jpg" || @url == "png"
+        @url == "jpg" || @url == "png" || @url == "gif"
     end
 
     private
@@ -87,25 +86,25 @@ class PostsController < ApplicationController
     def homepage_options
         @description = ""
         if params[:order] == "Newest Posts" || params[:order] == nil
-            @posts = Post.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+            @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
             @description = ""
         elsif params[:order] == "Oldest Posts"
-            @posts = Post.paginate(page: params[:page], per_page: 10).order(created_at: :asc)
+            @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :asc)
             @description = ""
         elsif params[:order] == "Self Posts" #active record scope method for filtering self posts
-            @posts = Post.paginate(page: params[:page], per_page: 10).self_posts
+            @posts = Post.paginate(page: params[:page], per_page: 20).self_posts
             @description = "" 
         elsif params[:order] == "Link Posts" #active record scope method for filtering linked posts
-            @posts = Post.paginate(page: params[:page], per_page: 10).linked_posts
+            @posts = Post.paginate(page: params[:page], per_page: 20).linked_posts
             @description = ""
         end
         if params[:query] != nil
-            @posts = Post.paginate(page: params[:page], per_page: 10).search(params[:query]).order(created_at: :desc)
+            @posts = Post.paginate(page: params[:page], per_page: 20).search(params[:query]).order(created_at: :desc)
             render 'index'
         end
         # if community nested show page, filter posts by only that community
         if nested?
-            @posts = Post.paginate(page: params[:page], per_page: 10).where(community_id: params[:community_id])
+            @posts = Post.paginate(page: params[:page], per_page: 20).where(community_id: params[:community_id])
             @description = "#{Community.find_by(params[:community_id]).category.capitalize}: #{Community.find_by(params[:community_id]).info}"
         end
     end

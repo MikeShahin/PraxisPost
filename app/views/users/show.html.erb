@@ -1,47 +1,26 @@
 <div class="showpost">
-<h1><%= @user.name %>'s profile</h1>
-<br>
-<% if admin %>
-    <p>This is the site admin</p>
-<% end %>
-
-<% if session[:user_id] == @user.id %>
-    <%= link_to 'Edit Info', edit_user_path(@user) %>
+    <h1><%= @user.name %>'s profile</h1>
     <br>
-    <br>
-<% end %>
+    <% if admin %>
+        <p>This is the site admin</p>
+    <% end %>
 
-<h3>All posts by <%= @user.name %>:</h3>
+    <% if session[:user_id] == @user.id %>
+        <%= link_to 'Edit Info', edit_user_path(@user) %>
+        <br>
+        <br>
+    <% end %>
+
+<%= form_tag(user_path(@user), method: "get") do %>
+    <%= select_tag :profile_view, options_for_select(['Posts', 'Comments', 'Communities'], :selected => params[:profile_view]), {class: "box"} %>
+    <%= submit_tag "Submit", name: nil %>
+<% end %>
 </div>
 
-<% if @posts.empty? %>
-    <div class="showpost">
-        <p>User has no posts</p>
-    </div>
-<% else %>
-<ol>
-    <% @posts.each do |p| %>
-    <div class="post">
-        <li>
-        <% if p.url != "" %>
-            <h5><%= link_to p.title, p.url %></h5>
-        <% else %>
-            <h5><%= link_to p.title, post_path(p) %></h5>
-        <% end %>
-        <div class="postinfo">
-           <p> Created on <%= p.created_at.strftime("%B %d, %l:%M%P") %> posted in <%= link_to p.community.category, community_posts_path(p.community) %>
-
-            <% if p.comments.count == 1 %>
-                <%= link_to "#{p.comments.count} comment", post_path(p) %>
-            <% else %>
-                <%= link_to "#{p.comments.count} comments", post_path(p) %>
-            <% end %>
-        </li></div></p>
-
-    </div>
-    <% end %>
-<% end %>
-    <br>
-    <br>
-    </ol>
-<%= will_paginate @posts %>
+<% if params[:profile_view] == "Posts" || params[:profile_view] == nil %>
+    <%= render 'posts_view' %>
+<% elsif params[:profile_view] == "Comments" %>
+    <%= render 'comments_view' %>
+<% elsif params[:profile_view] == "Communities" %>
+    <%= render 'communities_view' %>
+<%end %>

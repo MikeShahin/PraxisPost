@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    require 'pry'
     protect_from_forgery with: :exception
     add_flash_types :notice, :error
 
