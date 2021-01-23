@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :current_user
-    before_action :set_post, only: [:show, :update, :destroy]
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
     helper_method :picture?
     
     def index
@@ -33,7 +33,6 @@ class PostsController < ApplicationController
         if !logged_in?
             redirect_to signin_path, :error => "Please login to view comments"
         end  
-        @user = User.find_by(id: session[:user_id])
         @comments = @post.comments.all
         @comment = @post.comments.new
         # display pics on show page if url ends with picture extension:
@@ -62,18 +61,18 @@ class PostsController < ApplicationController
         redirect_to root_path
     end
 
+    private
+    
     def picture?
         @url == "jpg" || @url == "png" || @url == "gif"
     end
-
-    private
 
     def nested?
         @nested = params[:community_id]
     end
 
     def user_allowed?
-        session[:user_id] == Post.find_by(id: params[:id]).user_id || admin
+        session[:user_id] == @post.user_id || admin
     end
 
     def set_post
@@ -84,19 +83,15 @@ class PostsController < ApplicationController
     end
 
     def homepage_options
-        @description = ""
         if params[:order] == "Newest Posts" || params[:order] == nil
+            params[:order] = "Newest Posts"
             @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
-            @description = ""
         elsif params[:order] == "Oldest Posts"
             @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :asc)
-            @description = ""
-        elsif params[:order] == "Self Posts" #active record scope method for filtering self posts
+        elsif params[:order] == "Self Posts" 
             @posts = Post.paginate(page: params[:page], per_page: 20).self_posts
-            @description = "" 
-        elsif params[:order] == "Link Posts" #active record scope method for filtering linked posts
+        elsif params[:order] == "Link Posts" 
             @posts = Post.paginate(page: params[:page], per_page: 20).linked_posts
-            @description = ""
         end
         if params[:query] != nil
             @posts = Post.paginate(page: params[:page], per_page: 20).search(params[:query]).order(created_at: :desc)
@@ -105,7 +100,7 @@ class PostsController < ApplicationController
         # if community nested show page, filter posts by only that community
         if nested?
             @posts = Post.paginate(page: params[:page], per_page: 20).where(community_id: params[:community_id])
-            @description = "#{Community.find_by(params[:community_id]).category.capitalize}: #{Community.find_by(params[:community_id]).info}"
+            @description = "#{Community.find_by(id: params[:community_id]).category.capitalize}: #{Community.find_by(id: params[:community_id]).info}"
         end
     end
     

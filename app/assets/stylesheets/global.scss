@@ -74,6 +74,8 @@ header {
     }
     .navoptions {
         margin-top: 7px;
+        position: absolute;
+        right: 20px;
     }
 	nav {
 		float: left;
@@ -99,7 +101,7 @@ header {
   }
 
 .sorting {
-    margin-left: 5pc;
+    margin-left: 2pc;
     // .box {
     //     float: left;
     //   }
@@ -163,6 +165,7 @@ header {
   .description {
       color: aqua;
       text-align: center;
+      margin-top: 2pc;
   }
 
 .pagination {

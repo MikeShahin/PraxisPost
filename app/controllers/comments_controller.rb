@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
+    
     def new
-          @post = Post.find(params[:post_id])
-          @comment = @post.comments.new(parent_id: params[:parent_id])
+        @comment = Comment.new
       end
 
     def create
@@ -13,9 +13,6 @@ class CommentsController < ApplicationController
       else
           redirect_back(fallback_location: root_path)
       end
-    end
-
-    def show
     end
 
     private

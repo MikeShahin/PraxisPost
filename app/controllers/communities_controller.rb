@@ -6,7 +6,6 @@ class CommunitiesController < ApplicationController
 
     def index
         @communities = Community.all.order(:category)
-        # @user = current_user
     end
 
     def show
