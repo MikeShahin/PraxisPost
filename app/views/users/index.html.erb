@@ -1,17 +1,19 @@
-<h1>User List</h1>
+<div class="showpost">
+    <h1>User List</h1>
 
-<% if admin %>
-<ol>
-    <% @users.each do |u| %>
-    <li>
-        <%= link_to u.name, user_path(u) %>
-        <%= u.email%>
-        <br>
-        <br>
-    </li>
+    <% if admin %>
+    <ol>
+        <% @users.each do |u| %>
+        <li>
+            <%= link_to u.name, user_path(u) %>
+            <%= u.email%>
+            <br>
+            <br>
+        </li>
+        <% end %>
+    </ol>
+    <% else %>
+        <p>Sorry, you do not have access to this page</p>
+        <%=link_to 'Go Home', root_path %>
     <% end %>
-</ol>
-<% else %>
-    <p>Sorry, you do not have access to this page</p>
-    <%=link_to 'Go Home', root_path %>
-<% end %>
+</div>

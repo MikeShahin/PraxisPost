@@ -1,21 +1,27 @@
 <div class="navoptions">
     <% if logged_in? %>
+
       <% if !@nested %>
         <%= link_to 'New Post', new_post_path %>
       <% else %>
         <%= link_to 'Post in this community', new_community_post_path %>
       <% end %>
+
       <%=link_to 'User Page', user_path(current_user) %>
+
       <% if @nested %>
         <%= link_to 'Back Home', root_path %>
       <% end %>
+
       <% if admin %>
         <%= link_to 'User List', users_path %>
       <% end %>
+
       <%=link_to 'Communites', communities_path %>
       <%=link_to 'Log Out', logout_path %>
-  <% else %>
-      <%= link_to 'Log In', signin_path %>
-      <%= link_to 'Sign Up', new_user_path %>
-  <% end %>
+      
+    <% else %>
+        <%= link_to 'Sign In', signin_path %>
+        <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
 </div>

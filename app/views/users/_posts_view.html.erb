@@ -1,11 +1,12 @@
 <div class="showpost">
 
-<% if @posts.empty? %>
-        <p>User has no posts</p>
-    </div>
-<% else %>
-    <h3>All posts by <%= @user.name %>:</h3>
-    </div>
-    <%= render 'posts/display' %>
-<% end %>
-<%= will_paginate @posts %>
+    <% if @posts.empty? %>
+            <p>User has no posts</p>
+        </div>
+    <% else %>
+            <h3>All posts by <%= @user.name %>:</h3>
+        </div>
+        <%= render 'posts/display' %>
+    <% end %>
+    
+    <%= will_paginate @posts %>

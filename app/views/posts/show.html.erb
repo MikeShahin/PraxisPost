@@ -1,7 +1,8 @@
 <div class="showpost">
     <h2><a href="<%=@post.url%>"><%= @post.title %></a></h2>
+
     <div class="postinfo">
-    <p>by: <%= link_to @post.user.name, user_path(@post.user) %> in <%= link_to @post.community.category, community_posts_path(@post.community) %></p>
+        <p>by: <%= link_to @post.user.name, user_path(@post.user) %> in <%= link_to @post.community.category, community_posts_path(@post.community) %></p>
     </div>
 
     <% if picture? %>
@@ -27,9 +28,9 @@
 
         <% if @comments.count != 0 %>
             <ol>
-            <% @comments.each do |c| %>
-                <li><%= link_to c.user.name, user_path(c.user) %> replied: <%= c.reply %></li>
-            <% end %>
+                <% @comments.each do |c| %>
+                    <li><%= link_to c.user.name, user_path(c.user) %> replied: <%= c.reply %></li>
+                <% end %>
             </ol>
         <% else %>
             <p>No comments yet</p>

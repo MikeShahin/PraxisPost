@@ -17,7 +17,7 @@ class CommunitiesController < ApplicationController
         @community = Community.new(community_params)
         if @community.valid?
             @community.save
-            redirect_to new_post_path
+            redirect_to community_posts_path(@community)
         else
             render :new
         end

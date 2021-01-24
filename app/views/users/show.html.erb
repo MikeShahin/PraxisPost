@@ -11,10 +11,10 @@
         <br>
     <% end %>
 
-<%= form_tag(user_path(@user), method: "get") do %>
-    <%= select_tag :profile_view, options_for_select(['Posts', 'Comments', 'Communities'], :selected => params[:profile_view]), {class: "box"} %>
-    <%= submit_tag "Submit", name: nil %>
-<% end %>
+    <%= form_tag(user_path(@user), method: "get") do %>
+        <%= select_tag :profile_view, options_for_select(['Posts', 'Comments', 'Communities'], :selected => params[:profile_view]), {class: "box"} %>
+        <%= submit_tag "Submit", name: nil %>
+    <% end %>
 </div>
 
 <% if params[:profile_view] == "Posts" || params[:profile_view] == nil %>
@@ -23,4 +23,4 @@
     <%= render 'comments_view' %>
 <% elsif params[:profile_view] == "Communities" %>
     <%= render 'communities_view' %>
-<%end %>
+<% end %>

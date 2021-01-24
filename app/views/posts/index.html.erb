@@ -1,14 +1,30 @@
 <% if !@nested %>
-<div class="showpost">
-  <% if params[:query] %>
-    <h3>All posts with <%= params[:query] %>:</h3>
-  <% else params[:order] %>
-    <h3>All of the <%= params[:order] %>:</h3>
-  <% end %>
-</div>
-  <%= render "full_index" %>
+  <div class="showpost">
+    <% if params[:query] %>
+      <h3>All posts with <%= params[:query] %>:</h3>
+    <% else %>
+      <h3><%= @welcome %></h3>
+    <% end %>
+  </div>
+  <%= render "sort_and_search" %>
 <% end %>
+
 <h3 class="description"><%= @description %></h3>
 <br>
+
+<% if @posts.empty? && @nested %>
+  <div class="centered">
+    <br>
+    <br>
+    <h4 class="community"><%= link_to 'Be the first to post here!', new_community_post_path %> </h4>
+  </div>
+<% elsif @posts.empty? && params[:query] %>
+  <div class="centered">
+    <br>
+    <br>
+    <h4><%= "Sorry, no matches found" %> </h4>
+  </div>
+<% end %>
+
 <%= render "display" %>
 <%= will_paginate @posts %>

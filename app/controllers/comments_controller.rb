@@ -1,9 +1,5 @@
 class CommentsController < ApplicationController
     
-    def new
-        @comment = Comment.new
-      end
-
     def create
       @comment = Comment.new(comment_params)
       @comment.user_id = session[:user_id]
@@ -20,5 +16,4 @@ class CommentsController < ApplicationController
     def comment_params
         params.require(:comment).permit(:reply, :user_id, :post_id)
     end
-
 end

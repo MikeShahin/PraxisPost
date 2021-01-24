@@ -5,7 +5,6 @@ class PostsController < ApplicationController
     
     def index
         homepage_options
-        # binding.pry
     end
 
     def new
@@ -13,7 +12,7 @@ class PostsController < ApplicationController
             redirect_to root_path
         elsif nested? # use to pass through @nested instance variable to view page
             @post = Post.new
-            @community = Community.find_by(params[:community_id]).category.capitalize
+            @community = Community.find_by(id: params[:community_id]).category.capitalize
         else
             @post = Post.new
         end
@@ -31,7 +30,7 @@ class PostsController < ApplicationController
 
     def show
         if !logged_in?
-            redirect_to signin_path, :error => "Please login to view comments"
+            redirect_to signin_path, :notice => "Please login to view comments"
         end  
         @comments = @post.comments.all
         @comment = @post.comments.new
@@ -42,7 +41,7 @@ class PostsController < ApplicationController
     def edit
         # if the user is not the same one who made the post, or an admin, they cannot edit the post
         if !user_allowed?
-            redirect_to root_path, :error => "You may only edit your own posts!"
+            redirect_to root_path, :notice => "You may only edit your own posts!"
         else
             set_post
         end
@@ -50,7 +49,7 @@ class PostsController < ApplicationController
 
     def update
         if @post.update(post_params)
-            redirect_to post_path(@post), :notice => "Post successfully edited!"
+            redirect_to post_path(@post), :notice => "Post successfully updated!"
         else
             render 'new'
         end
@@ -64,7 +63,8 @@ class PostsController < ApplicationController
     private
     
     def picture?
-        @url == "jpg" || @url == "png" || @url == "gif"
+        extensions = ["jpg", "png", "gif"]
+        extensions.include?(@url)
     end
 
     def nested?
@@ -78,21 +78,29 @@ class PostsController < ApplicationController
     def set_post
         @post = Post.find_by(id: params[:id])
         if @post.nil?
-            redirect_to root_path, :notice => "That post does not exist, stop trying to hack this website!"
+            redirect_to root_path, :notice => "That post does not exist anymore!"
         end
     end
 
     def homepage_options
-        if params[:order] == "Newest Posts" || params[:order] == nil
-            params[:order] = "Newest Posts"
+        case params[:order]
+        when "Newest Posts"
             @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
-        elsif params[:order] == "Oldest Posts"
+            @welcome = "All of the newest posts:"
+        when "Oldest Posts"
             @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :asc)
-        elsif params[:order] == "Self Posts" 
+            @welcome = "All of the posts sorted by oldest:"
+        when "Self Posts"
             @posts = Post.paginate(page: params[:page], per_page: 20).self_posts
-        elsif params[:order] == "Link Posts" 
+            @welcome = "All self posts:"
+        when "Link Posts" 
             @posts = Post.paginate(page: params[:page], per_page: 20).linked_posts
+            @welcome = "All link posts:"
+        else
+            @posts = Post.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
+            @welcome = "All of the newest posts:"
         end
+        
         if params[:query] != nil
             @posts = Post.paginate(page: params[:page], per_page: 20).search(params[:query]).order(created_at: :desc)
             render 'index'

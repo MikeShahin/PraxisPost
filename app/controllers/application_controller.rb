@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     require 'pry'
     protect_from_forgery with: :exception
-    add_flash_types :notice, :error
+    # add_flash_types :error
 
     helper_method :logged_in?, :admin, :current_user
 

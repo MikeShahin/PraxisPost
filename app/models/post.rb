@@ -20,5 +20,4 @@ class Post < ApplicationRecord
           self.all
         end
     end
-    
 end

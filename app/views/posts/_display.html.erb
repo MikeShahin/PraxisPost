@@ -1,27 +1,27 @@
-    <ol>
+<ol>
     <% @posts.each do |p| %>
-    <div class="post">
-        <li>
-        <% if p.url != "" %>
-            <h3><%= link_to p.title, p.url %></h3>
-        <% else %>
-            <h3><%= link_to p.title, post_path(p) %></h3>
-        <% end %>
-        <div class="postinfo">
-            <% if params[:controller] == "posts" %>
-                <p>by <%= link_to p.user.name, user_path(p.user) %> posted in <%= link_to p.community.category, community_posts_path(p.community) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>.
+        <div class="post">
+            <% if p.url != "" %>
+                <li><h3><%= link_to p.title, p.url %></h3>
             <% else %>
-                <p>posted in <%= link_to p.community.category, community_posts_path(p.community) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>. 
+                <li><h3><%= link_to p.title, post_path(p) %></h3>
             <% end %>
-            <% if p.comments.count == 1 %>
-                <%= link_to "#{p.comments.count} comment", post_path(p) %></li>
-            <% else %>
-                <%= link_to "#{p.comments.count} comments", post_path(p) %></li>
-            <% end %></p>
-        </div>
 
-    </div>
+            <div class="postinfo">
+                <% if params[:controller] == "posts" %>
+                    <p>by <%= link_to p.user.name, user_path(p.user) %> posted in <%= link_to p.community.category, community_posts_path(p.community) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>.
+                <% else %>
+                    <p>posted in <%= link_to p.community.category, community_posts_path(p.community) %> on <%= p.created_at.strftime("%B %d, %l:%M%P") %>. 
+                <% end %>
+
+                <% if p.comments.count == 1 %>
+                    <%= link_to "#{p.comments.count} comment", post_path(p) %></li>
+                <% else %>
+                    <%= link_to "#{p.comments.count} comments", post_path(p) %></li>
+                <% end %></p>
+            </div>
+        </div>
     <% end %>
     <br>
     <br>
-    </ol>
+</ol>
